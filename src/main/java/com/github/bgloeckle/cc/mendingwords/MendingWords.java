@@ -8,6 +8,7 @@ import java.util.NavigableSet;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MendingWords {
@@ -20,6 +21,8 @@ public class MendingWords {
     }
 
     public void go() throws IOException {
+        long startNano = System.nanoTime();
+
         String word;
         while ((word = wordReader.readLine()) != null) {
             if (word.length() > 8) {
@@ -50,5 +53,8 @@ public class MendingWords {
         });
 
         System.out.println("Found " + count.get() + " words matching the criteria.");
+        long endNano = System.nanoTime();
+
+        System.out.println("Took " + TimeUnit.NANOSECONDS.toMillis(endNano - startNano) + " ms");
     }
 }
